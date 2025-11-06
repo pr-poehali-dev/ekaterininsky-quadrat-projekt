@@ -5,34 +5,55 @@ import Icon from "@/components/ui/icon";
 const Index = () => {
   const infrastructure = [
     {
-      icon: "Users",
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/66ff5a16-c4c2-4217-b404-759be828aa88.jpg",
       title: "Конференц-залы",
       description: "Современные залы для мероприятий"
     },
     {
-      icon: "Heart",
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/498f6ae5-53d9-4fea-ae51-61bb697447ef.jpg",
       title: "Центр Здоровья",
       description: "Профессиональный медицинский центр"
     },
     {
-      icon: "Dumbbell",
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/7fb2946d-a46f-488f-9e84-c1e6f364c931.jpg",
       title: "Тренажерный зал",
       description: "Оснащен современным оборудованием"
     },
     {
-      icon: "Music",
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/9ce22bb5-d312-4cb8-a787-6f484eebe17c.jpg",
       title: "Сцена",
       description: "Для концертов и развлечений"
     },
     {
-      icon: "Sparkles",
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/313fe98d-7c11-40cb-82f5-b27a6a127da5.jpg",
       title: "Интерактивное пространство",
       description: "Зона для творчества и отдыха"
     },
     {
-      icon: "Bike",
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/3b463864-c61a-41c2-9739-9d80be3ec3b9.jpg",
       title: "Велопрокат",
       description: "Прогулки вдоль набережной"
+    }
+  ];
+
+  const rooms = [
+    {
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/b71252b6-6dbb-4432-8447-4900da6f13a1.jpg",
+      title: "Стандарт",
+      description: "Уютный номер с видом на море",
+      features: ["2 гостя", "Вид на море", "Wi-Fi"]
+    },
+    {
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/fc0aa417-70ac-42f3-85f8-a4dc55dee55a.jpg",
+      title: "Люкс",
+      description: "Просторный номер с балконом",
+      features: ["3 гостя", "Балкон", "Кондиционер"]
+    },
+    {
+      image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/417be22e-cd82-41c6-ac52-295035962c54.jpg",
+      title: "Семейный",
+      description: "Идеален для отдыха с детьми",
+      features: ["4 гостя", "Детская зона", "Мини-бар"]
     }
   ];
 
@@ -81,13 +102,18 @@ const Index = () => {
             {infrastructure.map((item, index) => (
               <Card 
                 key={index} 
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary/20"
+                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                </div>
                 <CardContent className="p-6 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Icon name={item.icon as any} size={32} className="text-white" />
-                  </div>
                   <h3 className="text-xl font-semibold mb-2 text-foreground">
                     {item.title}
                   </h3>
@@ -152,27 +178,77 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 px-4 bg-gradient-to-b from-accent/20 to-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-foreground">
+            Номера
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">
+            Комфорт для каждого гостя
+          </p>
+
+          <div className="relative">
+            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {rooms.map((room, index) => (
+                <Card 
+                  key={index}
+                  className="flex-shrink-0 w-80 snap-center hover:shadow-xl transition-all duration-300 overflow-hidden"
+                >
+                  <div className="relative h-56 overflow-hidden">
+                    <img 
+                      src={room.image}
+                      alt={room.title}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-2xl font-semibold mb-2 text-foreground">
+                      {room.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      {room.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {room.features.map((feature, i) => (
+                        <span 
+                          key={i}
+                          className="px-3 py-1 bg-accent text-accent-foreground rounded-full text-sm"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-foreground">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-6 text-foreground">
             Найдите нас на карте
           </h2>
           
-          <Card className="p-8 shadow-xl">
-            <div className="flex items-center justify-center gap-2 mb-6">
+          <Card className="p-4 shadow-xl">
+            <div className="flex items-center justify-center gap-2 mb-4">
               <Icon name="Star" size={24} className="text-yellow-500 fill-yellow-500" />
               <span className="text-3xl font-bold text-foreground">4.8</span>
               <span className="text-muted-foreground text-lg">на Яндекс Картах</span>
             </div>
 
-            <Button 
-              size="lg"
-              className="w-full md:w-auto text-lg px-8 py-6"
-              onClick={() => window.open('https://yandex.ru/maps/-/CLv7VM86', '_blank')}
-            >
-              <Icon name="MapPin" size={24} className="mr-2" />
-              Открыть на Яндекс Картах
-            </Button>
+            <div className="w-full h-96 rounded-lg overflow-hidden">
+              <iframe
+                src="https://yandex.ru/map-widget/v1/?ll=39.726261%2C43.585472&mode=search&oid=1076394713&ol=biz&z=16"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                allowFullScreen
+                style={{ position: 'relative' }}
+              />
+            </div>
           </Card>
         </div>
       </section>
