@@ -1,8 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import { useRef } from "react";
 
 const Index = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 350;
+      const newScrollLeft = scrollContainerRef.current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount);
+      scrollContainerRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth'
+      });
+    }
+  };
   const infrastructure = [
     {
       image: "https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/66ff5a16-c4c2-4217-b404-759be828aa88.jpg",
@@ -61,13 +74,13 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: "url('https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/95c7bc2f-82c5-47ce-9ab7-7449c94d6010.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
+          className="absolute inset-0 z-0 flex justify-center"
         >
+          <img 
+            src="https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/95c7bc2f-82c5-47ce-9ab7-7449c94d6010.jpg"
+            alt="Екатерининский квартал"
+            className="h-full w-auto object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20" />
         </div>
 
@@ -84,9 +97,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <Icon name="ChevronDown" size={32} className="text-white" />
-        </div>
+
       </section>
 
       <section className="py-20 px-4">
@@ -186,11 +197,30 @@ const Index = () => {
           </p>
 
           <div className="relative">
-            <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+            <button 
+              onClick={() => scroll('left')}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all"
+              aria-label="Прокрутить влево"
+            >
+              <Icon name="ChevronLeft" size={24} className="text-foreground" />
+            </button>
+            
+            <button 
+              onClick={() => scroll('right')}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all"
+              aria-label="Прокрутить вправо"
+            >
+              <Icon name="ChevronRight" size={24} className="text-foreground" />
+            </button>
+
+            <div 
+              ref={scrollContainerRef}
+              className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide px-12"
+            >
               {rooms.map((room, index) => (
                 <Card 
                   key={index}
-                  className="flex-shrink-0 w-80 snap-center hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="flex-shrink-0 w-[calc(33.333%-16px)] min-w-[300px] snap-center hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
                   <div className="relative h-56 overflow-hidden">
                     <img 
