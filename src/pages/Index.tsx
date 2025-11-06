@@ -256,9 +256,7 @@ const Index = () => {
 
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-6 text-foreground">
-            Найдите нас на карте
-          </h2>
+          <h2 className="text-4xl font-bold text-center mb-6 text-foreground">Мы на карте</h2>
           
           <Card className="p-4 shadow-xl">
             <div className="flex items-center justify-center gap-2 mb-4">
