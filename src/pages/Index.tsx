@@ -74,13 +74,14 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
-          className="absolute inset-0 z-0 flex justify-center"
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: "url('https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/95c7bc2f-82c5-47ce-9ab7-7449c94d6010.jpg')",
+            backgroundSize: "auto 50%",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat"
+          }}
         >
-          <img 
-            src="https://cdn.poehali.dev/projects/f17a6b49-c218-4622-be31-eda4e88c2b91/files/95c7bc2f-82c5-47ce-9ab7-7449c94d6010.jpg"
-            alt="Екатерининский квартал"
-            className="h-full w-auto object-cover"
-          />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20" />
         </div>
 
